@@ -3,25 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>Happy Birthday Flevian!</title>
     <style>
+        /* Fixed Font Import */
         @import url('https://googleapis.com');
 
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+        /* Root Layout Adjustments */
+        html, body {
             margin: 0;
             padding: 0;
-            text-align: center;
+            width: 100%;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
             color: #4a4a4a;
             overflow-x: hidden;
         }
 
-        header {
-            padding: 50px 20px 20px 20px;
+        body {
+            text-align: center;
         }
 
-        h1 {
+        /* Full Screen Cover Page */
+        #cover-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #7209b7 0%, #ff477e 100%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #cover-page.slide-up {
+            transform: translateY(-100vh);
+        }
+
+        .cover-content h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .cover-content p {
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .open-btn {
+            background-color: #fff;
+            color: #ff477e;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content Layout */
+        header {
+            padding: 60px 20px 20px 20px;
+        }
+
+        h1.main-title {
             font-family: 'Fredoka One', cursive;
             font-size: 3.5rem;
             color: #ff477e;
@@ -124,11 +185,12 @@
             gap: 25px;
         }
 
+        /* Glowing Photo Cards */
         .photo-card {
             background: white;
             padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            animation: cardGlow 3s infinite ease-in-out;
         }
 
         .photo-card img {
@@ -145,6 +207,103 @@
             color: #ff477e;
         }
 
+        /* Closing Page Section */
+        .closing-page {
+            background-color: rgba(255, 255, 255, 0.6);
+            margin-top: 80px;
+            padding: 60px 20px;
+            border-top: 2px dashed #ffb3c6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .closing-page h2 {
+            font-size: 2.2rem;
+            color: #7209b7;
+            margin-bottom: 15px;
+        }
+
+        .closing-page p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.6;
+        }
+
+        /* Pure CSS Birthday Cake Container */
+        .cake-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto 40px auto;
+        }
+
+        .cake-body {
+            position: absolute;
+            bottom: 0;
+            width: 120px;
+            height: 60px;
+            background: #ff7096;
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 8px 0 #ff477e;
+        }
+
+        .cake-frosting {
+            position: absolute;
+            bottom: 45px;
+            width: 120px;
+            height: 20px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 65px;
+            left: 54px;
+            width: 12px;
+            height: 35px;
+            background: linear-gradient(to right, #7209b7, #b5179e);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 100px;
+            left: 53px;
+            width: 14px;
+            height: 20px;
+            background: #ffb703;
+            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            box-shadow: 0 0 10px #ffb703, 0 0 20px #ff477e;
+            animation: flicker 0.6s infinite alternate;
+            transform-origin: center bottom;
+        }
+
+        /* Footer Element Styles */
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #8a8a8a;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer a {
+            color: #ff477e;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #7209b7;
+        }
+
+        /* FX Animations */
         .balloon {
             position: fixed;
             bottom: -100px;
@@ -156,6 +315,16 @@
             animation: floatUp 3.5s linear forwards;
         }
 
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 18px;
+            width: 2px;
+            height: 10px;
+            background-color: rgba(0,0,0,0.2);
+        }
+
         .confetti-piece {
             position: fixed;
             top: -20px;
@@ -164,6 +333,21 @@
             z-index: 998;
             pointer-events: none;
             animation: fallDown 3s linear forwards;
+        }
+
+        /* Glowing Keyframes for Photo Cards */
+        @keyframes cardGlow {
+            0%, 100% {
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 71, 126, 0.6), 0 0 30px rgba(114, 9, 183, 0.4);
+            }
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+            100% { transform: scale(1.1) rotate(2deg); opacity: 1; box-shadow: 0 0 12px #ffb703, 0 0 25px #ff477e; }
         }
 
         @keyframes floatUp {
@@ -181,17 +365,34 @@
             50% { transform: translateY(-10px); }
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* Responsive Design */
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
+            h1.main-title { font-size: 2.5rem; }
             .photo-grid { grid-template-columns: 1fr; }
             .btn-container { flex-direction: column; align-items: center; }
+            .cover-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Cover Page -->
+    <div id="cover-page">
+        <div class="cover-content">
+            <h1>Happy Birthday! 🎉</h1>
+            <p>Someone special is turning a year older today!</p>
+            <button class="open-btn" onclick="openPresent()">Open Your Gift 🎁</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <header>
-        <h1>Happy Birthday Flevian 💜! 🎂</h1>
+        <h1 class="main-title">Happy Birthday Flevian 💜! 🎂</h1>
         <p class="subtitle">Wishing you the most magical, amazing day ever!</p>
         
         <div class="btn-container">
@@ -199,7 +400,7 @@
             <button class="wish-btn" onclick="toggleWish()">My Wish for You 💜</button>
         </div>
 
-        <!-- Local Audio Component linking to your uploaded song file -->
+        <!-- Local Audio Component -->
         <audio id="birthday-music" loop>
             <source src="birthday-song.mp3" type="audio/mpeg">
         </audio>
@@ -215,7 +416,7 @@
     </div>
 
     <div class="gallery-container">
-        <h2> Favorite Memories & Pics 😋 📸</h2>
+        <h2>Favorite Memories & Pics 😋 📸</h2>
         <div class="photo-grid">
             <div class="photo-card">
                 <img src="https://i.ibb.co/1fhJv638/IMG-20260602-WA0031.jpg" alt="Memory 1">
@@ -232,7 +433,33 @@
         </div>
     </div>
 
+    <!-- Closing Page -->
+    <div class="closing-page">
+        <h2>Make a Wish! 🌟</h2>
+        <p>The best gift is spending another year being awesome. Thank you for all the laughs, adventures, and memories. Here's to more magical moments ahead!</p>
+        
+        <div class="cake-container">
+            <div class="flame"></div>
+            <div class="candle"></div>
+            <div class="cake-frosting"></div>
+            <div class="cake-body"></div>
+        </div>
+
+        <p style="font-style: italic; color: #ff477e;">With love and endless birthday wishes! 💜</p>
+    </div>
+
+    <footer>
+        <p>Made with 💜 | Happy Birthday to the best person ever!</p>
+    </footer>
+
     <script>
+        // Cover page opening function
+        function openPresent() {
+            const coverPage = document.getElementById('cover-page');
+            coverPage.classList.add('slide-up');
+            triggerCelebration();
+        }
+
         // Smooth local audio trigger logic
         function playLocalMusic() {
             const music = document.getElementById('birthday-music');
@@ -272,12 +499,12 @@
         }
 
         function triggerCelebration() {
-            playLocalMusic(); // Starts the song
-            launchEffects();   // Launches visuals
+            playLocalMusic();
+            launchEffects();
         }
 
         function toggleWish() {
-            playLocalMusic(); // Starts the song if they click the wish button first instead
+            playLocalMusic();
             
             const letter = document.getElementById('birthday-letter');
             if (letter.style.display === 'block') {
